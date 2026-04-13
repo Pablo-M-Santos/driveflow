@@ -29,7 +29,7 @@ public class VehicleService {
         }
 
         Vehicle vehicle = VehicleMapper.toEntity(requestDTO);
-        return VehicleMapper.toDTO(vehicleRepository.save(vehicle));
+        return VehicleMapper.toDTO(vehicleRepository.saveAndFlush(vehicle));
     }
 
     @Transactional(readOnly = true)
@@ -67,7 +67,7 @@ public class VehicleService {
         vehicle.setYear(requestDTO.getYear());
         vehicle.setDailyValue(requestDTO.getDailyValue());
 
-        return VehicleMapper.toDTO(vehicleRepository.save(vehicle));
+        return VehicleMapper.toDTO(vehicleRepository.saveAndFlush(vehicle));
     }
 
     public void deleteVehicle(Long id) {

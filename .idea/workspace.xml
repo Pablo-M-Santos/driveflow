@@ -4,25 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="447b52ca-d43b-45c2-b666-ccd97fd64b93" name="Changes" comment="feat: add CustomerMapper and CustomerRepository for customer data management">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/config/OpenApiConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/controller/CustomerController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/controller/RentalController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/dto/RentalRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/dto/RentalResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/mapper/RentalMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/model/Rental.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/model/RentalStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/repository/RentalRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/service/CustomerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/service/RentalService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/db/migration/V3__create_table_rentals.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/DriveflowApiApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/DriveflowApiApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/controller/VehicleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/controller/VehicleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/dto/VehicleRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/dto/VehicleRequestDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/dto/VehicleResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/dto/VehicleResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/repository/VehicleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/repository/VehicleRepository.java" afterDir="false" />
+    <list default="true" id="447b52ca-d43b-45c2-b666-ccd97fd64b93" name="Changes" comment="feat: add metadata files for database configuration and project settings">
+      <change afterPath="$PROJECT_DIR$/backend/k6/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/k6/rental-concurrency.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/db/migration/V4__add_rental_period_exclusion_constraint.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/service/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/service/CustomerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/service/RentalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/service/RentalService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/service/VehicleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/pablo/driveflow_api/service/VehicleService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,10 +58,7 @@
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;Pablo-M-Santos&quot;
-  }
+  &quot;lastFilter&quot;: {}
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
@@ -98,37 +85,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "Spring Boot.DriveflowApiApplication.executor": "Run",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/pablo-santos/Documentos/projetos-pessoais/DriveFlow",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.DriveflowApiApplication.executor&quot;: &quot;Run&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/pablo-santos/Documentos/projetos-pessoais/DriveFlow&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
@@ -156,7 +144,8 @@
       <updated>1776016761732</updated>
       <workItem from="1776016764410" duration="1554000" />
       <workItem from="1776018879407" duration="8614000" />
-      <workItem from="1776081286758" duration="4015000" />
+      <workItem from="1776081286758" duration="7562000" />
+      <workItem from="1776094084517" duration="348000" />
     </task>
     <task id="LOCAL-00001" summary="feat: create customers table with unique constraints for CPF and email">
       <option name="closed" value="true" />
@@ -198,18 +187,154 @@
       <option name="project" value="LOCAL" />
       <updated>1776085279705</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="feat: add OpenApiConfig for API documentation setup">
+      <option name="closed" value="true" />
+      <created>1776085334755</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1776085334755</updated>
+    </task>
+    <task id="LOCAL-00007" summary="feat: implement CustomerService for customer management operations">
+      <option name="closed" value="true" />
+      <created>1776085346334</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1776085346334</updated>
+    </task>
+    <task id="LOCAL-00008" summary="feat: add CustomerController for managing customer operations with CRUD functionality">
+      <option name="closed" value="true" />
+      <created>1776085359796</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1776085359796</updated>
+    </task>
+    <task id="LOCAL-00009" summary="feat: enhance VehicleRequestDTO and VehicleResponseDTO with validation messages and OpenAPI schema annotations">
+      <option name="closed" value="true" />
+      <created>1776085385368</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1776085385368</updated>
+    </task>
+    <task id="LOCAL-00010" summary="feat: add query to VehicleRepository for finding available vehicles by rental period">
+      <option name="closed" value="true" />
+      <created>1776085395016</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1776085395016</updated>
+    </task>
+    <task id="LOCAL-00011" summary="feat: enhance VehicleController with OpenAPI annotations for improved API documentation">
+      <option name="closed" value="true" />
+      <created>1776085404573</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1776085404573</updated>
+    </task>
+    <task id="LOCAL-00012" summary="feat: create rentals table with necessary fields and constraints for rental management">
+      <option name="closed" value="true" />
+      <created>1776085410835</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1776085410835</updated>
+    </task>
+    <task id="LOCAL-00013" summary="feat: add Rental entity and RentalStatus enum for rental management">
+      <option name="closed" value="true" />
+      <created>1776085421851</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1776085421851</updated>
+    </task>
+    <task id="LOCAL-00014" summary="feat: add Rental entity and RentalStatus enum for rental management">
+      <option name="closed" value="true" />
+      <created>1776085432854</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1776085432854</updated>
+    </task>
+    <task id="LOCAL-00015" summary="feat: implement RentalRepository with CRUD operations and conflict checking for rentals">
+      <option name="closed" value="true" />
+      <created>1776085441512</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1776085441512</updated>
+    </task>
+    <task id="LOCAL-00016" summary="feat: add RentalMapper for converting Rental entities to RentalResponseDTO">
+      <option name="closed" value="true" />
+      <created>1776085449579</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1776085449580</updated>
+    </task>
+    <task id="LOCAL-00017" summary="feat: implement RentalService for managing rental operations and validations">
+      <option name="closed" value="true" />
+      <created>1776085458392</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1776085458392</updated>
+    </task>
+    <task id="LOCAL-00018" summary="feat: add RentalController for managing rental operations and providing API endpoints">
+      <option name="closed" value="true" />
+      <created>1776085471394</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1776085471394</updated>
+    </task>
+    <task id="LOCAL-00019" summary="feat: add metadata files for database configuration and project settings">
+      <option name="closed" value="true" />
+      <created>1776085482281</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1776085482281</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat: create customers table with unique constraints for CPF and email" />
     <MESSAGE value="feat: configure SpringDoc for API documentation and Swagger UI" />
     <MESSAGE value="feat: add CustomerRequestDTO and CustomerResponseDTO for customer data handling" />
     <MESSAGE value="feat: add CustomerMapper and CustomerRepository for customer data management" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add CustomerMapper and CustomerRepository for customer data management" />
+    <MESSAGE value="feat: add OpenApiConfig for API documentation setup" />
+    <MESSAGE value="feat: implement CustomerService for customer management operations" />
+    <MESSAGE value="feat: add CustomerController for managing customer operations with CRUD functionality" />
+    <MESSAGE value="feat: enhance VehicleRequestDTO and VehicleResponseDTO with validation messages and OpenAPI schema annotations" />
+    <MESSAGE value="feat: add query to VehicleRepository for finding available vehicles by rental period" />
+    <MESSAGE value="feat: enhance VehicleController with OpenAPI annotations for improved API documentation" />
+    <MESSAGE value="feat: create rentals table with necessary fields and constraints for rental management" />
+    <MESSAGE value="feat: add Rental entity and RentalStatus enum for rental management" />
+    <MESSAGE value="feat: implement RentalRepository with CRUD operations and conflict checking for rentals" />
+    <MESSAGE value="feat: add RentalMapper for converting Rental entities to RentalResponseDTO" />
+    <MESSAGE value="feat: implement RentalService for managing rental operations and validations" />
+    <MESSAGE value="feat: add RentalController for managing rental operations and providing API endpoints" />
+    <MESSAGE value="feat: add metadata files for database configuration and project settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add metadata files for database configuration and project settings" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
