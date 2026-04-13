@@ -25,7 +25,7 @@ public class VehicleService {
 
     public VehicleResponseDTO createVehicle(VehicleRequestDTO requestDTO) {
         if (vehicleRepository.existsByPlate(requestDTO.getPlate())) {
-            throw new DuplicateResourceException("Veículo", "placa", requestDTO.getPlate());
+            throw new DuplicateResourceException("Vehicle", "plate", requestDTO.getPlate());
         }
 
         Vehicle vehicle = VehicleMapper.toEntity(requestDTO);
@@ -35,14 +35,14 @@ public class VehicleService {
     @Transactional(readOnly = true)
     public VehicleResponseDTO getVehicleById(Long id) {
         Vehicle vehicle = vehicleRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Veículo", "ID", id));
+                .orElseThrow(() -> new ResourceNotFoundException("Vehicle", "ID", id));
         return VehicleMapper.toDTO(vehicle);
     }
 
     @Transactional(readOnly = true)
     public VehicleResponseDTO getVehicleByPlate(String plate) {
         Vehicle vehicle = vehicleRepository.findByPlate(plate)
-                .orElseThrow(() -> new ResourceNotFoundException("Veículo", "placa", plate));
+                .orElseThrow(() -> new ResourceNotFoundException("Vehicle", "plate", plate));
         return VehicleMapper.toDTO(vehicle);
     }
 
@@ -54,11 +54,11 @@ public class VehicleService {
 
     public VehicleResponseDTO updateVehicle(Long id, VehicleRequestDTO requestDTO) {
         Vehicle vehicle = vehicleRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Veículo", "ID", id));
+                .orElseThrow(() -> new ResourceNotFoundException("Vehicle", "ID", id));
 
         if (!vehicle.getPlate().equals(requestDTO.getPlate()) &&
                 vehicleRepository.existsByPlate(requestDTO.getPlate())) {
-            throw new DuplicateResourceException("Veículo", "placa", requestDTO.getPlate());
+            throw new DuplicateResourceException("Vehicle", "plate", requestDTO.getPlate());
         }
 
         vehicle.setBrand(requestDTO.getBrand());
@@ -72,7 +72,7 @@ public class VehicleService {
 
     public void deleteVehicle(Long id) {
         Vehicle vehicle = vehicleRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Veículo", "ID", id));
+                .orElseThrow(() -> new ResourceNotFoundException("Vehicle", "ID", id));
         
         vehicle.setDeletedAt(LocalDateTime.now());
         vehicleRepository.save(vehicle);
@@ -80,7 +80,7 @@ public class VehicleService {
 
     public VehicleResponseDTO updateVehicleStatus(Long id, VehicleStatus status) {
         Vehicle vehicle = vehicleRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Veículo", "ID", id));
+                .orElseThrow(() -> new ResourceNotFoundException("Vehicle", "ID", id));
 
         vehicle.setStatus(status);
         return VehicleMapper.toDTO(vehicleRepository.save(vehicle));
