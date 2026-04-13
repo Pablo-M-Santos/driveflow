@@ -50,7 +50,7 @@ public class RentalController {
     @Operation(summary = "List rentals", description = "Returns a paginated list of rentals")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Rental list retrieved",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageResponse.class)))
+                    content = @Content(mediaType = "application/json"))
     })
     public ResponseEntity<PageResponse<RentalResponseDTO>> getAllRentals(@ParameterObject Pageable pageable) {
         Page<RentalResponseDTO> page = rentalService.getAllRentals(pageable);
@@ -80,7 +80,7 @@ public class RentalController {
     @Operation(summary = "Customer history", description = "Returns the paginated rental history for a customer")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "History retrieved",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageResponse.class))),
+                    content = @Content(mediaType = "application/json")),
             @ApiResponse(responseCode = "404", description = "Customer not found")
     })
     public ResponseEntity<PageResponse<RentalResponseDTO>> getRentalsByCustomer(
@@ -115,7 +115,7 @@ public class RentalController {
     @Operation(summary = "Available vehicles by period", description = "Lists vehicles available for a specific period")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Available vehicles retrieved",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageResponse.class))),
+                    content = @Content(mediaType = "application/json")),
             @ApiResponse(responseCode = "400", description = "Invalid period")
     })
     public ResponseEntity<PageResponse<VehicleResponseDTO>> getAvailableVehicles(

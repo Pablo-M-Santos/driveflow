@@ -10,7 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Schema(name = "PageResponse", description = "Standardized paginated response")
+@Schema(description = "Standardized paginated response")
 public class PageResponse<T> {
 
     @Schema(description = "List of items")

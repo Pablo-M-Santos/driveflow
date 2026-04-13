@@ -89,7 +89,8 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleGenericException(WebRequest request) {
+    @SuppressWarnings("unused")
+    public ResponseEntity<ErrorResponse> handleGenericException(Exception ex, WebRequest request) {
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.INTERNAL_SERVER_ERROR.value())

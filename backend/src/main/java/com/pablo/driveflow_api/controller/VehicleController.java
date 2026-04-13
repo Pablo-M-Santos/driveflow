@@ -48,7 +48,7 @@ public class VehicleController {
     @Operation(summary = "List all vehicles", description = "Returns a paginated list of all registered vehicles (excluding deleted)")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Vehicle list retrieved successfully",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageResponse.class)))
+                    content = @Content(mediaType = "application/json"))
     })
     public ResponseEntity<PageResponse<VehicleResponseDTO>> getAllVehicles(
             @ParameterObject Pageable pageable) {
