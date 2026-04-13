@@ -27,27 +27,27 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/v1/vehicles")
 @RequiredArgsConstructor
-@Tag(name = "Vehicles", description = "Operações de gestão de veículos - CRUD completo com validação de duplicidade e controle de status")
+@Tag(name = "Vehicles", description = "Vehicle management operations - Complete CRUD with duplication validation and status control")
 public class VehicleController {
 
     private final VehicleService vehicleService;
 
     @PostMapping
-    @Operation(summary = "Criar novo veículo", description = "Cadastra um novo veículo no sistema. A placa deve ser única.")
+    @Operation(summary = "Create new vehicle", description = "Registers a new vehicle in the system. Plate must be unique.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Veículo criado com sucesso",
+            @ApiResponse(responseCode = "201", description = "Vehicle created successfully",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = VehicleResponseDTO.class))),
-            @ApiResponse(responseCode = "409", description = "Placa já cadastrada no sistema"),
-            @ApiResponse(responseCode = "400", description = "Dados inválidos - Validação falhou")
+            @ApiResponse(responseCode = "409", description = "Plate already registered in the system"),
+            @ApiResponse(responseCode = "400", description = "Invalid data - Validation failed")
     })
     public ResponseEntity<VehicleResponseDTO> createVehicle(@Valid @RequestBody VehicleRequestDTO requestDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(vehicleService.createVehicle(requestDTO));
     }
 
     @GetMapping
-    @Operation(summary = "Listar todos os veículos", description = "Retorna uma lista paginada de todos os veículos cadastrados (excluindo deletados)")
+    @Operation(summary = "List all vehicles", description = "Returns a paginated list of all registered vehicles (excluding deleted)")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Lista de veículos recuperada com sucesso",
+            @ApiResponse(responseCode = "200", description = "Vehicle list retrieved successfully",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageResponse.class)))
     })
     public ResponseEntity<PageResponse<VehicleResponseDTO>> getAllVehicles(
@@ -63,80 +63,80 @@ public class VehicleController {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Buscar veículo por ID", description = "Retorna os detalhes de um veículo específico pelo ID")
+    @Operation(summary = "Search vehicle by ID", description = "Returns the details of a specific vehicle by ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Veículo encontrado",
+            @ApiResponse(responseCode = "200", description = "Vehicle found",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = VehicleResponseDTO.class))),
-            @ApiResponse(responseCode = "404", description = "Veículo não encontrado")
+            @ApiResponse(responseCode = "404", description = "Vehicle not found")
     })
     public ResponseEntity<VehicleResponseDTO> getVehicleById(
-            @Parameter(description = "ID do veículo")
+            @Parameter(description = "Vehicle ID")
             @PathVariable Long id) {
         return ResponseEntity.ok(vehicleService.getVehicleById(id));
     }
 
     @GetMapping("/plate/{plate}")
-    @Operation(summary = "Buscar veículo por placa", description = "Retorna os detalhes de um veículo pela sua placa")
+    @Operation(summary = "Search vehicle by plate", description = "Returns the details of a vehicle by its plate")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Veículo encontrado",
+            @ApiResponse(responseCode = "200", description = "Vehicle found",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = VehicleResponseDTO.class))),
-            @ApiResponse(responseCode = "404", description = "Veículo com essa placa não encontrado")
+            @ApiResponse(responseCode = "404", description = "Vehicle with this plate not found")
     })
     public ResponseEntity<VehicleResponseDTO> getVehicleByPlate(
-            @Parameter(description = "Placa do veículo (ex: ABC1234)")
+            @Parameter(description = "Vehicle plate (e.g., ABC1234)")
             @PathVariable String plate) {
         return ResponseEntity.ok(vehicleService.getVehicleByPlate(plate));
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Atualizar veículo completo", description = "Atualiza todos os dados de um veículo existente")
+    @Operation(summary = "Update complete vehicle", description = "Updates all data of an existing vehicle")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Veículo atualizado com sucesso",
+            @ApiResponse(responseCode = "200", description = "Vehicle updated successfully",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = VehicleResponseDTO.class))),
-            @ApiResponse(responseCode = "404", description = "Veículo não encontrado"),
-            @ApiResponse(responseCode = "409", description = "Placa já cadastrada em outro veículo"),
-            @ApiResponse(responseCode = "400", description = "Dados inválidos - Validação falhou")
+            @ApiResponse(responseCode = "404", description = "Vehicle not found"),
+            @ApiResponse(responseCode = "409", description = "Plate already registered on another vehicle"),
+            @ApiResponse(responseCode = "400", description = "Invalid data - Validation failed")
     })
     public ResponseEntity<VehicleResponseDTO> updateVehicle(
-            @Parameter(description = "ID do veículo a atualizar")
+            @Parameter(description = "Vehicle ID to update")
             @PathVariable Long id,
             @Valid @RequestBody VehicleRequestDTO requestDTO) {
         return ResponseEntity.ok(vehicleService.updateVehicle(id, requestDTO));
     }
 
     @PatchMapping("/{id}/status")
-    @Operation(summary = "Atualizar status do veículo", description = "Altera apenas o status do veículo (AVAILABLE ou UNAVAILABLE)")
+    @Operation(summary = "Update vehicle status", description = "Changes only the vehicle status (AVAILABLE or UNAVAILABLE)")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Status atualizado com sucesso",
+            @ApiResponse(responseCode = "200", description = "Status updated successfully",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = VehicleResponseDTO.class))),
-            @ApiResponse(responseCode = "404", description = "Veículo não encontrado"),
-            @ApiResponse(responseCode = "400", description = "Status inválido")
+            @ApiResponse(responseCode = "404", description = "Vehicle not found"),
+            @ApiResponse(responseCode = "400", description = "Invalid status")
     })
     public ResponseEntity<VehicleResponseDTO> updateVehicleStatus(
-            @Parameter(description = "ID do veículo")
+            @Parameter(description = "Vehicle ID")
             @PathVariable Long id,
-            @Parameter(description = "Novo status: AVAILABLE ou UNAVAILABLE")
+            @Parameter(description = "New status: AVAILABLE or UNAVAILABLE")
             @RequestParam VehicleStatus status) {
         return ResponseEntity.ok(vehicleService.updateVehicleStatus(id, status));
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Deletar veículo", description = "Realiza soft delete do veículo (marca como deletado sem remover do banco)")
+    @Operation(summary = "Delete vehicle", description = "Performs soft delete of the vehicle (marks as deleted without removing from database)")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Veículo deletado com sucesso"),
-            @ApiResponse(responseCode = "404", description = "Veículo não encontrado")
+            @ApiResponse(responseCode = "204", description = "Vehicle deleted successfully"),
+            @ApiResponse(responseCode = "404", description = "Vehicle not found")
     })
     public ResponseEntity<Void> deleteVehicle(
-            @Parameter(description = "ID do veículo a deletar")
+            @Parameter(description = "Vehicle ID to delete")
             @PathVariable Long id) {
         vehicleService.deleteVehicle(id);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/count/total")
-    @Operation(summary = "Contar total de veículos", description = "Retorna o número total de veículos cadastrados e não deletados")
+    @Operation(summary = "Count total vehicles", description = "Returns the total number of registered and non-deleted vehicles")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Total contado com sucesso",
+            @ApiResponse(responseCode = "200", description = "Total counted successfully",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = Map.class)))
     })
     public ResponseEntity<Map<String, Long>> countVehicles() {
