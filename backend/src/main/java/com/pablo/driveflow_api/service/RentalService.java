@@ -3,6 +3,7 @@ package com.pablo.driveflow_api.service;
 import com.pablo.driveflow_api.dto.RentalRequestDTO;
 import com.pablo.driveflow_api.dto.RentalResponseDTO;
 import com.pablo.driveflow_api.dto.VehicleResponseDTO;
+import com.pablo.driveflow_api.exception.DuplicateResourceException;
 import com.pablo.driveflow_api.exception.ResourceNotFoundException;
 import com.pablo.driveflow_api.exception.ValidationException;
 import com.pablo.driveflow_api.mapper.RentalMapper;
@@ -52,7 +53,7 @@ public class RentalService {
         );
 
         if (hasConflict) {
-            throw new ValidationException("Veiculo ja reservado para o periodo informado");
+            throw new DuplicateResourceException("Veiculo ja reservado para o periodo informado");
         }
 
         Rental rental = Rental.builder()
@@ -64,7 +65,7 @@ public class RentalService {
                 .status(RentalStatus.ACTIVE)
                 .build();
 
-        return RentalMapper.toDTO(rentalRepository.save(rental));
+        return RentalMapper.toDTO(rentalRepository.saveAndFlush(rental));
     }
 
     @Transactional(readOnly = true)
