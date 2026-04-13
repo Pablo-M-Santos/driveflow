@@ -11,34 +11,34 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Schema(name = "VehicleResponse", description = "Dados retornados de um veículo")
+@Schema(name = "VehicleResponse", description = "Vehicle response data")
 public class VehicleResponseDTO {
 
-    @Schema(example = "1", description = "ID único do veículo")
+    @Schema(example = "1", description = "Unique vehicle ID")
     private Long id;
 
-    @Schema(example = "Toyota", description = "Marca do veículo")
+    @Schema(example = "Toyota", description = "Vehicle brand")
     private String brand;
 
-    @Schema(example = "Corolla", description = "Modelo do veículo")
+    @Schema(example = "Corolla", description = "Vehicle model")
     private String model;
 
-    @Schema(example = "ABC1234", description = "Placa do veículo")
+    @Schema(example = "ABC1234", description = "Vehicle plate")
     private String plate;
 
-    @Schema(example = "2023", description = "Ano de fabricação")
+    @Schema(example = "2023", description = "Vehicle manufacturing year")
     private Integer year;
 
-    @Schema(example = "150.00", description = "Valor da diária em reais")
+    @Schema(example = "150.00", description = "Daily rate in BRL")
     private BigDecimal dailyValue;
 
-    @Schema(example = "AVAILABLE", description = "Status do veículo: AVAILABLE ou UNAVAILABLE")
+    @Schema(example = "AVAILABLE", description = "Vehicle status: AVAILABLE or UNAVAILABLE")
     private String status;
 
-    @Schema(example = "2024-01-15T10:30:00", description = "Data e hora de criação")
+    @Schema(example = "2024-01-15T10:30:00", description = "Creation date and time")
     private LocalDateTime createdAt;
 
-    @Schema(example = "2024-01-20T14:45:00", description = "Data e hora da última atualização")
+    @Schema(example = "2024-01-20T14:45:00", description = "Last update date and time")
     private LocalDateTime updatedAt;
 
 }

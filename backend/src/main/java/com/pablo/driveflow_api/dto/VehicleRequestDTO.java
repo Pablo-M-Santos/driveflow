@@ -13,27 +13,27 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Schema(name = "VehicleRequest", description = "Dados para criar ou atualizar um veículo")
+@Schema(name = "VehicleRequest", description = "Data for creating or updating a vehicle")
 public class VehicleRequestDTO {
 
-    @NotBlank(message = "Marca do veículo não pode ser vazia")
-    @Schema(example = "Toyota", description = "Marca do veículo")
+    @NotBlank(message = "Vehicle brand cannot be blank")
+    @Schema(example = "Toyota", description = "Vehicle brand")
     private String brand;
 
-    @NotBlank(message = "Modelo do veículo não pode ser vazio")
-    @Schema(example = "Corolla", description = "Modelo do veículo")
+    @NotBlank(message = "Vehicle model cannot be blank")
+    @Schema(example = "Corolla", description = "Vehicle model")
     private String model;
 
-    @NotBlank(message = "Placa do veículo não pode ser vazia")
-    @Schema(example = "ABC1234", description = "Placa única do veículo (deve ser única no sistema)")
+    @NotBlank(message = "Vehicle plate cannot be blank")
+    @Schema(example = "ABC1234", description = "Unique vehicle plate in the system")
     private String plate;
 
-    @Schema(example = "2023", description = "Ano de fabricação do veículo")
+    @Schema(example = "2023", description = "Vehicle manufacturing year")
     private Integer year;
 
-    @NotNull(message = "Valor da diária não pode ser nulo")
-    @Positive(message = "Valor da diária deve ser maior que zero")
-    @Schema(example = "150.00", description = "Valor da diária em reais")
+    @NotNull(message = "Daily rate cannot be null")
+    @Positive(message = "Daily rate must be greater than zero")
+    @Schema(example = "150.00", description = "Daily rate in BRL")
     private BigDecimal dailyValue;
 
 
