@@ -9,7 +9,7 @@ public class DuplicateResourceException extends CustomException {
     }
 
     public DuplicateResourceException(String resourceName, String fieldName, Object fieldValue) {
-        super(String.format("%s com %s '%s' já existe", resourceName, fieldName, fieldValue),
+        super(String.format("%s with %s '%s' already exists", resourceName, fieldName, fieldValue),
                 HttpStatus.CONFLICT.value());
     }
 }
