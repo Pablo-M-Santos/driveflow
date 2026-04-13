@@ -29,27 +29,27 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/v1/rentals")
 @RequiredArgsConstructor
-@Tag(name = "Rentals", description = "Operacoes de aluguel de veiculos com validacao de conflitos e calculo de valor total")
+@Tag(name = "Rentals", description = "Vehicle rental operations with conflict validation and total value calculation")
 public class RentalController {
 
     private final RentalService rentalService;
 
     @PostMapping
-    @Operation(summary = "Registrar aluguel", description = "Cria um novo aluguel validando conflito de periodo e disponibilidade do veiculo")
+    @Operation(summary = "Register rental", description = "Creates a new rental validating period conflict and vehicle availability")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Aluguel registrado com sucesso",
+            @ApiResponse(responseCode = "201", description = "Rental registered successfully",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = RentalResponseDTO.class))),
-            @ApiResponse(responseCode = "400", description = "Dados invalidos ou periodo em conflito"),
-            @ApiResponse(responseCode = "404", description = "Cliente ou veiculo nao encontrado")
+            @ApiResponse(responseCode = "400", description = "Invalid data or conflicting period"),
+            @ApiResponse(responseCode = "404", description = "Customer or vehicle not found")
     })
     public ResponseEntity<RentalResponseDTO> createRental(@Valid @RequestBody RentalRequestDTO requestDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(rentalService.createRental(requestDTO));
     }
 
     @GetMapping
-    @Operation(summary = "Listar alugueis", description = "Retorna uma lista paginada de alugueis")
+    @Operation(summary = "List rentals", description = "Returns a paginated list of rentals")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Lista de alugueis recuperada",
+            @ApiResponse(responseCode = "200", description = "Rental list retrieved",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageResponse.class)))
     })
     public ResponseEntity<PageResponse<RentalResponseDTO>> getAllRentals(@ParameterObject Pageable pageable) {
@@ -64,27 +64,27 @@ public class RentalController {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Buscar aluguel por ID", description = "Retorna os detalhes de um aluguel especifico")
+    @Operation(summary = "Search rental by ID", description = "Returns the details of a specific rental")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Aluguel encontrado",
+            @ApiResponse(responseCode = "200", description = "Rental found",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = RentalResponseDTO.class))),
-            @ApiResponse(responseCode = "404", description = "Aluguel nao encontrado")
+            @ApiResponse(responseCode = "404", description = "Rental not found")
     })
     public ResponseEntity<RentalResponseDTO> getRentalById(
-            @Parameter(description = "ID do aluguel")
+            @Parameter(description = "Rental ID")
             @PathVariable Long id) {
         return ResponseEntity.ok(rentalService.getRentalById(id));
     }
 
     @GetMapping("/customer/{customerId}")
-    @Operation(summary = "Historico por cliente", description = "Retorna o historico paginado de alugueis de um cliente")
+    @Operation(summary = "Customer history", description = "Returns the paginated rental history for a customer")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Historico recuperado",
+            @ApiResponse(responseCode = "200", description = "History retrieved",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageResponse.class))),
-            @ApiResponse(responseCode = "404", description = "Cliente nao encontrado")
+            @ApiResponse(responseCode = "404", description = "Customer not found")
     })
     public ResponseEntity<PageResponse<RentalResponseDTO>> getRentalsByCustomer(
-            @Parameter(description = "ID do cliente")
+            @Parameter(description = "Customer ID")
             @PathVariable Long customerId,
             @ParameterObject Pageable pageable) {
         Page<RentalResponseDTO> page = rentalService.getRentalsByCustomer(customerId, pageable);
@@ -98,30 +98,30 @@ public class RentalController {
     }
 
     @PatchMapping("/{id}/cancel")
-    @Operation(summary = "Cancelar aluguel", description = "Cancela um aluguel ativo")
+    @Operation(summary = "Cancel rental", description = "Cancels an active rental")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Aluguel cancelado com sucesso",
+            @ApiResponse(responseCode = "200", description = "Rental canceled successfully",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = RentalResponseDTO.class))),
-            @ApiResponse(responseCode = "400", description = "Aluguel ja cancelado ou finalizado"),
-            @ApiResponse(responseCode = "404", description = "Aluguel nao encontrado")
+            @ApiResponse(responseCode = "400", description = "Rental already canceled or finished"),
+            @ApiResponse(responseCode = "404", description = "Rental not found")
     })
     public ResponseEntity<RentalResponseDTO> cancelRental(
-            @Parameter(description = "ID do aluguel")
+            @Parameter(description = "Rental ID")
             @PathVariable Long id) {
         return ResponseEntity.ok(rentalService.cancelRental(id));
     }
 
     @GetMapping("/vehicles/available")
-    @Operation(summary = "Veiculos disponiveis por periodo", description = "Lista os veiculos disponiveis para um periodo especifico")
+    @Operation(summary = "Available vehicles by period", description = "Lists vehicles available for a specific period")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Veiculos disponiveis recuperados",
+            @ApiResponse(responseCode = "200", description = "Available vehicles retrieved",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageResponse.class))),
-            @ApiResponse(responseCode = "400", description = "Periodo invalido")
+            @ApiResponse(responseCode = "400", description = "Invalid period")
     })
     public ResponseEntity<PageResponse<VehicleResponseDTO>> getAvailableVehicles(
-            @Parameter(description = "Data inicial no formato yyyy-MM-dd", example = "2026-04-15")
+            @Parameter(description = "Start date in yyyy-MM-dd format", example = "2026-04-15")
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-            @Parameter(description = "Data final no formato yyyy-MM-dd", example = "2026-04-18")
+            @Parameter(description = "End date in yyyy-MM-dd format", example = "2026-04-18")
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
             @ParameterObject Pageable pageable) {
         Page<VehicleResponseDTO> page = rentalService.getAvailableVehicles(startDate, endDate, pageable);
@@ -135,9 +135,9 @@ public class RentalController {
     }
 
     @GetMapping("/count/total")
-    @Operation(summary = "Contar alugueis", description = "Retorna o total de alugueis cadastrados")
+    @Operation(summary = "Count rentals", description = "Returns the total number of registered rentals")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Total de alugueis recuperado",
+            @ApiResponse(responseCode = "200", description = "Total rentals retrieved",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = Map.class)))
     })
     public ResponseEntity<Map<String, Long>> countRentals() {
