@@ -36,13 +36,13 @@ public class RentalService {
         validateDates(requestDTO.getStartDate(), requestDTO.getEndDate());
 
         Customer customer = customerRepository.findById(requestDTO.getCustomerId())
-                .orElseThrow(() -> new ResourceNotFoundException("Cliente", "ID", requestDTO.getCustomerId()));
+                .orElseThrow(() -> new ResourceNotFoundException("Customer", "ID", requestDTO.getCustomerId()));
 
         Vehicle vehicle = vehicleRepository.findById(requestDTO.getVehicleId())
-                .orElseThrow(() -> new ResourceNotFoundException("Veiculo", "ID", requestDTO.getVehicleId()));
+                .orElseThrow(() -> new ResourceNotFoundException("Vehicle", "ID", requestDTO.getVehicleId()));
 
         if (vehicle.getStatus() != VehicleStatus.AVAILABLE) {
-            throw new ValidationException("Veiculo indisponivel para aluguel");
+            throw new ValidationException("Vehicle is unavailable for rental");
         }
 
         boolean hasConflict = rentalRepository.existsConflictForVehicle(
@@ -53,7 +53,7 @@ public class RentalService {
         );
 
         if (hasConflict) {
-            throw new DuplicateResourceException("Veiculo ja reservado para o periodo informado");
+            throw new DuplicateResourceException("Vehicle is already reserved for the requested period");
         }
 
         Rental rental = Rental.builder()
@@ -71,7 +71,7 @@ public class RentalService {
     @Transactional(readOnly = true)
     public RentalResponseDTO getRentalById(Long id) {
         Rental rental = rentalRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Aluguel", "ID", id));
+                .orElseThrow(() -> new ResourceNotFoundException("Rental", "ID", id));
         return RentalMapper.toDTO(rental);
     }
 
@@ -83,7 +83,7 @@ public class RentalService {
     @Transactional(readOnly = true)
     public Page<RentalResponseDTO> getRentalsByCustomer(Long customerId, Pageable pageable) {
         customerRepository.findById(customerId)
-                .orElseThrow(() -> new ResourceNotFoundException("Cliente", "ID", customerId));
+                .orElseThrow(() -> new ResourceNotFoundException("Customer", "ID", customerId));
 
         return rentalRepository.findAllByCustomerId(customerId, pageable)
                 .map(RentalMapper::toDTO);
@@ -91,14 +91,14 @@ public class RentalService {
 
     public RentalResponseDTO cancelRental(Long id) {
         Rental rental = rentalRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Aluguel", "ID", id));
+                .orElseThrow(() -> new ResourceNotFoundException("Rental", "ID", id));
 
         if (rental.getStatus() == RentalStatus.CANCELED) {
-            throw new ValidationException("Aluguel ja esta cancelado");
+            throw new ValidationException("Rental is already canceled");
         }
 
         if (rental.getStatus() == RentalStatus.FINISHED) {
-            throw new ValidationException("Aluguel finalizado nao pode ser cancelado");
+            throw new ValidationException("Finished rental cannot be canceled");
         }
 
         rental.setStatus(RentalStatus.CANCELED);
@@ -128,11 +128,11 @@ public class RentalService {
 
     private void validateDates(LocalDate startDate, LocalDate endDate) {
         if (startDate == null || endDate == null) {
-            throw new ValidationException("Datas de inicio e fim sao obrigatorias");
+            throw new ValidationException("Start and end dates are mandatory");
         }
 
         if (endDate.isBefore(startDate)) {
-            throw new ValidationException("Data final nao pode ser anterior a data inicial");
+            throw new ValidationException("End date cannot be before start date");
         }
     }
 
