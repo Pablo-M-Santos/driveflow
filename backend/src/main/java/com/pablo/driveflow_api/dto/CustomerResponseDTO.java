@@ -11,31 +11,31 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Schema(name = "CustomerResponse", description = "Dados retornados de um cliente")
+@Schema(name = "CustomerResponse", description = "Customer response data")
 public class CustomerResponseDTO {
 
-    @Schema(example = "1", description = "ID único do cliente")
+    @Schema(example = "1", description = "Unique customer ID")
     private Long id;
 
-    @Schema(example = "João Silva", description = "Nome completo do cliente")
+    @Schema(example = "João Silva", description = "Customer full name")
     private String name;
 
-    @Schema(example = "12345678901", description = "CPF do cliente")
+    @Schema(example = "12345678901", description = "Customer CPF")
     private String cpf;
 
-    @Schema(example = "joao@example.com", description = "Email do cliente")
+    @Schema(example = "joao@example.com", description = "Customer email")
     private String email;
 
-    @Schema(example = "11987654321", description = "Telefone do cliente")
+    @Schema(example = "11987654321", description = "Customer phone number")
     private String phone;
 
-    @Schema(example = "2024-01-15", description = "Data de cadastro do cliente")
+    @Schema(example = "2024-01-15", description = "Customer registration date")
     private LocalDate registrationDate;
 
-    @Schema(example = "2024-01-15T10:30:00", description = "Data e hora de criação")
+    @Schema(example = "2024-01-15T10:30:00", description = "Creation date and time")
     private LocalDateTime createdAt;
 
-    @Schema(example = "2024-01-20T14:45:00", description = "Data e hora da última atualização")
+    @Schema(example = "2024-01-20T14:45:00", description = "Last update date and time")
     private LocalDateTime updatedAt;
 }
 
