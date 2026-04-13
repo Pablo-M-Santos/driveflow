@@ -16,7 +16,7 @@ public class OpenApiConfig {
                 .info(new Info()
                         .title("DriveFlow API")
                         .version("v1.0.0")
-                        .description("API para gestão de aluguel de veículos - Sistema completo de reservas e controle de frota")
+                        .description("Vehicle rental management API - Complete reservation and fleet control system")
                         .contact(new Contact()
                                 .name("Pablo Santos")
                                 .email("pablo@driveflow.com"))

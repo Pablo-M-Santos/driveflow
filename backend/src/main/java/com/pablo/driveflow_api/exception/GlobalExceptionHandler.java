@@ -94,7 +94,7 @@ public class GlobalExceptionHandler {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .error("Internal Server Error")
-                .message("Erro ao processar a requisição")
+                .message("Error processing request")
                 .path(request.getDescription(false).replace("uri=", ""))
                 .build();
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
@@ -102,22 +102,22 @@ public class GlobalExceptionHandler {
 
     private String resolveConflictMessage(String causeMessage) {
         if (causeMessage.contains("uk_rentals_vehicle_period_active") || causeMessage.contains("rentals")) {
-            return "Veiculo ja reservado para o periodo informado";
+            return "Vehicle is already reserved for the requested period";
         }
 
         if (causeMessage.contains("uk_veiculos_placa") || causeMessage.contains("vehicles_plate") || causeMessage.contains("plate")) {
-            return "Veiculo com essa placa ja existe";
+            return "Vehicle with this plate already exists";
         }
 
         if (causeMessage.contains("uk_customers_cpf") || causeMessage.contains("cpf")) {
-            return "Cliente com esse CPF ja existe";
+            return "Customer with this CPF already exists";
         }
 
         if (causeMessage.contains("uk_customers_email") || causeMessage.contains("email")) {
-            return "Cliente com esse email ja existe";
+            return "Customer with this email already exists";
         }
 
-        return "Conflito de integridade com o banco de dados";
+        return "Data integrity conflict with database";
     }
 }
 
