@@ -32,7 +32,7 @@ public class CustomerService {
         }
 
         Customer customer = CustomerMapper.toEntity(requestDTO);
-        return CustomerMapper.toDTO(customerRepository.save(customer));
+        return CustomerMapper.toDTO(customerRepository.saveAndFlush(customer));
     }
 
     @Transactional(readOnly = true)
@@ -82,7 +82,7 @@ public class CustomerService {
         customer.setPhone(requestDTO.getPhone());
         customer.setRegistrationDate(requestDTO.getRegistrationDate());
 
-        return CustomerMapper.toDTO(customerRepository.save(customer));
+        return CustomerMapper.toDTO(customerRepository.saveAndFlush(customer));
     }
 
     public void deleteCustomer(Long id) {

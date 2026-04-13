@@ -1,5 +1,6 @@
 package com.pablo.driveflow_api.exception;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -9,6 +10,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 @RestControllerAdvice
@@ -50,6 +52,24 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(ex.getStatusCode()).body(errorResponse);
     }
 
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ErrorResponse> handleDataIntegrityViolationException(DataIntegrityViolationException ex, WebRequest request) {
+        String causeMessage = ex.getMostSpecificCause().getMessage() != null
+                ? ex.getMostSpecificCause().getMessage().toLowerCase(Locale.ROOT)
+                : ex.getMessage() != null ? ex.getMessage().toLowerCase(Locale.ROOT) : "";
+
+        String message = resolveConflictMessage(causeMessage);
+
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.CONFLICT.value())
+                .error("Conflict")
+                .message(message)
+                .path(request.getDescription(false).replace("uri=", ""))
+                .build();
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, WebRequest request) {
         Map<String, String> fieldErrors = new HashMap<>();
@@ -78,6 +98,26 @@ public class GlobalExceptionHandler {
                 .path(request.getDescription(false).replace("uri=", ""))
                 .build();
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+    }
+
+    private String resolveConflictMessage(String causeMessage) {
+        if (causeMessage.contains("uk_rentals_vehicle_period_active") || causeMessage.contains("rentals")) {
+            return "Veiculo ja reservado para o periodo informado";
+        }
+
+        if (causeMessage.contains("uk_veiculos_placa") || causeMessage.contains("vehicles_plate") || causeMessage.contains("plate")) {
+            return "Veiculo com essa placa ja existe";
+        }
+
+        if (causeMessage.contains("uk_customers_cpf") || causeMessage.contains("cpf")) {
+            return "Cliente com esse CPF ja existe";
+        }
+
+        if (causeMessage.contains("uk_customers_email") || causeMessage.contains("email")) {
+            return "Cliente com esse email ja existe";
+        }
+
+        return "Conflito de integridade com o banco de dados";
     }
 }
 
