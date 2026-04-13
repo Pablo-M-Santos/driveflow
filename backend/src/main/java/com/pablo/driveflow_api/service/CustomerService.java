@@ -24,11 +24,11 @@ public class CustomerService {
 
     public CustomerResponseDTO createCustomer(CustomerRequestDTO requestDTO) {
         if (customerRepository.existsByCpf(requestDTO.getCpf())) {
-            throw new DuplicateResourceException("Cliente", "CPF", requestDTO.getCpf());
+            throw new DuplicateResourceException("Customer", "CPF", requestDTO.getCpf());
         }
 
         if (customerRepository.existsByEmail(requestDTO.getEmail())) {
-            throw new DuplicateResourceException("Cliente", "email", requestDTO.getEmail());
+            throw new DuplicateResourceException("Customer", "email", requestDTO.getEmail());
         }
 
         Customer customer = CustomerMapper.toEntity(requestDTO);
@@ -38,21 +38,21 @@ public class CustomerService {
     @Transactional(readOnly = true)
     public CustomerResponseDTO getCustomerById(Long id) {
         Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Cliente", "ID", id));
+                .orElseThrow(() -> new ResourceNotFoundException("Customer", "ID", id));
         return CustomerMapper.toDTO(customer);
     }
 
     @Transactional(readOnly = true)
     public CustomerResponseDTO getCustomerByCpf(String cpf) {
         Customer customer = customerRepository.findByCpf(cpf)
-                .orElseThrow(() -> new ResourceNotFoundException("Cliente", "CPF", cpf));
+                .orElseThrow(() -> new ResourceNotFoundException("Customer", "CPF", cpf));
         return CustomerMapper.toDTO(customer);
     }
 
     @Transactional(readOnly = true)
     public CustomerResponseDTO getCustomerByEmail(String email) {
         Customer customer = customerRepository.findByEmail(email)
-                .orElseThrow(() -> new ResourceNotFoundException("Cliente", "email", email));
+                .orElseThrow(() -> new ResourceNotFoundException("Customer", "email", email));
         return CustomerMapper.toDTO(customer);
     }
 
@@ -64,16 +64,16 @@ public class CustomerService {
 
     public CustomerResponseDTO updateCustomer(Long id, CustomerRequestDTO requestDTO) {
         Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Cliente", "ID", id));
+                .orElseThrow(() -> new ResourceNotFoundException("Customer", "ID", id));
 
         if (!customer.getCpf().equals(requestDTO.getCpf()) &&
                 customerRepository.existsByCpf(requestDTO.getCpf())) {
-            throw new DuplicateResourceException("Cliente", "CPF", requestDTO.getCpf());
+            throw new DuplicateResourceException("Customer", "CPF", requestDTO.getCpf());
         }
 
         if (!customer.getEmail().equals(requestDTO.getEmail()) &&
                 customerRepository.existsByEmail(requestDTO.getEmail())) {
-            throw new DuplicateResourceException("Cliente", "email", requestDTO.getEmail());
+            throw new DuplicateResourceException("Customer", "email", requestDTO.getEmail());
         }
 
         customer.setName(requestDTO.getName());
@@ -87,7 +87,7 @@ public class CustomerService {
 
     public void deleteCustomer(Long id) {
         Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Cliente", "ID", id));
+                .orElseThrow(() -> new ResourceNotFoundException("Customer", "ID", id));
 
         customer.setDeletedAt(LocalDateTime.now());
         customerRepository.save(customer);
